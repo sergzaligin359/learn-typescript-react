@@ -8,8 +8,10 @@ import { About } from './pages/About';
 import { Home } from './pages/Home';
 import { TestTSOmitHoc } from './pages/TestTSOmitHoc';
 import { SetData } from './pages/SetData';
-import { UpdateUser } from './pages/UpdateUser';
-
+import { UpdateUser } from './pages/users/UpdateUser';
+import { CreateUser } from './pages/users/CreateUser';
+import { CreateArticle } from './pages/articles/CreateArticle';
+import { UpdateArticle } from './pages/articles/UpdateArticle';
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -22,6 +24,9 @@ const App: React.FC = () => {
           <Route component={Todo} path="/todo" />
           <Route component={About} path="/about"/>
           <Route component={UpdateUser} path="/update-user/:id"/>
+          <Route component={CreateUser} path="/create-user"/>
+          <Route component={UpdateArticle} path="/article/update/:id"/>
+          <Route component={CreateArticle} path="/article/new"/>
         </Switch>
       </div>
     </BrowserRouter>
