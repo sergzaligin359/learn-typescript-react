@@ -1,22 +1,24 @@
 import { FC, useEffect, useState } from 'react'
 import { ArticleForm } from './components/ArticleForm';
-import { IInitialValues } from './interfaces/IInitialValues';
+import { IArticleProps } from './interfaces/IArticleProps';
+
 
 
 export const CreateArticle: FC = () => {
 
-    const [articles, setArticles] = useState<IInitialValues[]>(() => {
+    const [articles, setArticles] = useState<IArticleProps[]>(() => {
         const saved = localStorage.getItem('articles') || '[]';
         return JSON.parse(saved);
     });
 
     console.log('articles', articles);
 
-    const initialValues: IInitialValues = {
+    const initialValues: IArticleProps = {
+        id: '',
         title: '',
         desc: '',
         text: '',
-        tags: ''
+        tags: []
     }
 
     useEffect(() => {
@@ -24,8 +26,7 @@ export const CreateArticle: FC = () => {
         localStorage.setItem('articles', savedData);
     }, [articles]);
 
-    const onSubmit = ({title, desc, text, tags}: IInitialValues) => {
-        const id = (Date.now() * Math.random()).toString();
+    const onSubmit = ({id, title, desc, text, tags}: IArticleProps) => {
         setArticles(prev => {
             return [...prev, {
                 id, title, desc, text, tags
