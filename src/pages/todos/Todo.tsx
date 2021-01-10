@@ -5,11 +5,14 @@ import { TodoContext } from './../../state/todo/todoContext';
 import { todoReducer } from './../../state/todo/todoReducer';
 import { IActionTodo, ITodoProps } from '../../state/todo/interfaces';
 
-// interface Mprops { todos: ITodoProps[] , dispatchTodo: Dispatch<IActionTodo> }
+// type Mprops = { todos: any, dispatchTodo: any }
 
 export const Todo: React.FC = () => {
-    // const initialState: ITodoProps[] = [];
-    const [todos, dispatchTodo] = useReducer(todoReducer, []);
+
+    const initialState: ITodoProps[] = [];
+
+    const [todos, dispatchTodo] = useReducer(todoReducer, initialState);
+    
     console.log('Todos', todos)
   
     useEffect(()=> {

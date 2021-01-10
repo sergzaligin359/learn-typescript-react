@@ -27,6 +27,7 @@ export const Home: FC = () => {
                 <li><NavLink to="/todo">Страница задач</NavLink></li>
                 <li><NavLink to="/count">Страница c Counter</NavLink></li>
                 <li><NavLink to="/set-data">Страница генерации данных</NavLink></li>
+                <li><NavLink to="/tasks">Страница TASKS</NavLink></li>
             </ul>
         </div>
     )

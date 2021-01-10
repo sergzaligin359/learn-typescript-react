@@ -1,6 +1,6 @@
 export interface IActionTodo {
     payload?: any
-    type: string
+    readonly type: string
 }
 
 export type ITodoProps = {

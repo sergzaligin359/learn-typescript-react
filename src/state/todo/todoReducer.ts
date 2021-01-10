@@ -1,6 +1,6 @@
 import { ITodoProps, IActionTodo } from "./interfaces";
 
-export const todoReducer = (state: ITodoProps[], { type, payload }: IActionTodo) => {
+export const todoReducer = (state: ITodoProps[], { type, payload }: IActionTodo): ITodoProps[] => {
     switch (type) {
         case 'ADD_TODO':
                 return [

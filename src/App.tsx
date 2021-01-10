@@ -13,6 +13,7 @@ import { CreateUser } from './pages/users/CreateUser';
 import { CreateArticle } from './pages/articles/CreateArticle';
 import { UpdateArticle } from './pages/articles/UpdateArticle';
 import { Count } from './pages/Count';
+import { Tasks } from './pages/tasks/Tasks';
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           <Route component={UpdateArticle} path="/article/update/:id"/>
           <Route component={CreateArticle} path="/article/new"/>
           <Route component={Count} path="/count"/>
+          <Route component={Tasks} path="/tasks"/>
         </Switch>
       </div>
     </BrowserRouter>
