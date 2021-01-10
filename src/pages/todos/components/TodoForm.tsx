@@ -1,33 +1,27 @@
-import React, { useState } from 'react'
+import { useContext } from "react";
+import { ContextTodo } from "../../../state/todo/types/context";
+import { TodoTitle } from "../../../state/todo/types/todo";
+import { ActionType } from "../../../types/stateType";
 
-interface ITodoFormProps {
-    addTodo: (title: string) => void
-}
+export const TodoForm: React.FC = () => {
+    
+    const {state, changeState} = useContext(ContextTodo);
 
-export const TodoForm: React.FC<ITodoFormProps> = ({ addTodo }) => {
-    const [title, setTitle] = useState('')
-    const changeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value)
+    const addTodo = (event: React.FormEvent<HTMLFormElement>, todo: TodoTitle) => {
+        event.preventDefault();
+        changeState?.({type: ActionType.Add, payload: todo})
     }
-    const keyPressHandle = (e: React.KeyboardEvent) => {
-        if(e.key === 'Enter'){
-            addTodo(title)
-            setTitle('')
-        }
+
+    const changeTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
+        changeState?.({type: ActionType.Change, payload: event.target.value})
     }
+
     return (
-        <div className="input-field mt-40">
-            <input 
-                onChange={ changeHandle }
-                onKeyPress={ keyPressHandle }
-                value={title}
-                type="text" 
-                id="title" 
-                placeholder="Введите название дела" 
-            />
-            <label htmlFor="title" className="active">
-                Введите название дела
-            </label>
-        </div>
+        <>
+            <form onSubmit={(event) => addTodo(event, state?.newTodo as string)}>
+                <input type='text' onChange={(event)=>changeTodo(event)} value={state?.newTodo}/>
+                <button type="submit">Add a todo</button>
+            </form>
+        </>
     )
-}
+};

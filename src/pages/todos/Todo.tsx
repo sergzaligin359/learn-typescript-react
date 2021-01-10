@@ -1,69 +1,35 @@
-import React, { Dispatch, useEffect, useReducer } from 'react'
+import React, { Reducer, useReducer } from 'react'
 import { TodoForm } from './components/TodoForm'
 import { TodoList } from './components/TodoList'
-import { TodoContext } from './../../state/todo/todoContext';
-import { todoReducer } from './../../state/todo/todoReducer';
-import { IActionTodo, ITodoProps } from '../../state/todo/interfaces';
+import { ContextTodo, ContextState } from '../../state/todo/types/context';
+import { State } from '../../state/todo/types/state';
+import { Action } from '../../state/todo/types/actions';
+import { todoReducer } from '../../state/todo/todoReducer';
 
-// type Mprops = { todos: any, dispatchTodo: any }
+// Начальные значения стейта
+export const initialState: State = {
+  newTodo: '',
+  todos: []
+}
 
 export const Todo: React.FC = () => {
 
-    const initialState: ITodoProps[] = [];
+  const [state, changeState] = useReducer<Reducer<State, Action>>(todoReducer, initialState);
 
-    const [todos, dispatchTodo] = useReducer(todoReducer, initialState);
+  const ContextState: ContextState = {
+      state,
+      changeState
+  };
     
-    console.log('Todos', todos)
-  
-    useEffect(()=> {
-      // const saved = JSON.parse(localStorage.getItem('todos') || '[]') as ITodo[]
-      // setTodos(saved);
-    }, [])
-  
-    // useEffect(()=> {
-    //   localStorage.setItem('todos', JSON.stringify(todos))
-    // }, [todos])
-
-    const addTodoHandle = (title: string): void => {
-        const newTodo: ITodoProps = {
-          title,
-          id: Date.now(),
-          completed: false
-        }
-        console.log('add todo', newTodo)
-        dispatchTodo({
-          type: 'ADD_TODO',
-          payload: newTodo
-        })
-        // setTodos(prev => [...prev, newTodo])
-      }
-      const toggleTodoHandle = (id: number): void => {
-        // setTodos(prev => prev.map((item) => {
-        //   if(item.id === id){
-        //     item.completed = !item.completed
-        //   }
-        //   return item
-        // }))
-      }
-      const removeTodoHandle = (id: number): void => {
-        // const isRemove = window.confirm(`Are you shoure delete element with id ${id}?`)
-        // if(isRemove){
-        //   setTodos(prev => prev.filter((item) => item.id !== id))
-        // }
-      }
-
-    const obj: any = { todos, dispatchTodo };
-
-    return (
-      <TodoContext.Provider value={obj}>
-        <div>
-            <h1>Todo page</h1>
-            <TodoForm addTodo={addTodoHandle} />
-            <TodoList 
-                toggleTodo={toggleTodoHandle} 
-                removeTodo={removeTodoHandle} 
-            />
-        </div>
-      </TodoContext.Provider>
-    )
+  console.log('Todos', state)
+    
+  return (
+    <ContextTodo.Provider value={ContextState}>
+      <div>
+          <h1>Todo page</h1>
+          <TodoForm />
+          <TodoList />
+      </div>
+    </ContextTodo.Provider>
+  )
 }

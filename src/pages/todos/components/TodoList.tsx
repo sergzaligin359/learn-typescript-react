@@ -1,19 +1,5 @@
-import React, {Dispatch, useContext} from 'react'
-import { IActionTodo, ITodoProps } from '../../../state/todo/interfaces';
-import { TodoContext } from '../../../state/todo/todoContext';
 
-interface ITodoListProps {
-    toggleTodo: (id: number) => void,
-    removeTodo: (id: number) => void
-}
-// interface Mprops { todos: ITodoProps[] , dispatchTodo: Dispatch<IActionTodo> }
-export const TodoList: React.FC<ITodoListProps> = ({toggleTodo, removeTodo}) => {
-    // if(todos.length < 1){
-    //     return <p>Нет задач...</p>
-    // }
-    const {todos}: any = useContext(TodoContext);
-    
-    console.log('TODOS CONTEXT', todos);
+export const TodoList: React.FC = () => {
     return (
         <ul>
             {

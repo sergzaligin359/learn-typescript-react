@@ -1,7 +1,7 @@
-import * as React from "react";
+import { Reducer } from "react";
 import {State, Action, ActionType} from "../types/stateType";
 
-export const todoReducer: React.Reducer<State, Action> = (state, action):State => {
+export const todoReducer: Reducer<State, Action> = (state, action): State => {
     switch (action.type) {
         case ActionType.Add: {
             return {...state, tasks: [...state.tasks, {
