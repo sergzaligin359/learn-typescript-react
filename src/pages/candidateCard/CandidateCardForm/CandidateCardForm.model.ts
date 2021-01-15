@@ -1,3 +1,3 @@
 export interface CandidateCardProps{
-  name: string
+  username: string
 }
