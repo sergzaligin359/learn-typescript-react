@@ -17,6 +17,7 @@ export const Home: FC = () => {
         <div>
             <h1>Главная страница</h1>
             <ul>
+                <li><NavLink to="/candidate-card/1">Карточка кандидата</NavLink></li>
                 <li><NavLink to="/article/new">Страница создать статью</NavLink></li>
                 <li><NavLink to={`/article/update/${article?.id}`}>Страница обновить статью по id - {article?.title}</NavLink></li>
                 <li><NavLink to="/create-user">Страница создать юзера</NavLink></li>

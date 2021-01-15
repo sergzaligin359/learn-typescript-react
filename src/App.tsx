@@ -14,6 +14,8 @@ import { CreateArticle } from './pages/articles/CreateArticle';
 import { UpdateArticle } from './pages/articles/UpdateArticle';
 import { Count } from './pages/Count';
 import { Tasks } from './pages/tasks/Tasks';
+import { CandidateCard } from './pages/candidateCard/CandidateCard';
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -31,6 +33,7 @@ const App: React.FC = () => {
           <Route component={CreateArticle} path="/article/new"/>
           <Route component={Count} path="/count"/>
           <Route component={Tasks} path="/tasks"/>
+          <Route component={CandidateCard} path="/candidate-card/:id"/>
         </Switch>
       </div>
     </BrowserRouter>
