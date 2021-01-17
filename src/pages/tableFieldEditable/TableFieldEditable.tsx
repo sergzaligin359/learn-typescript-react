@@ -1,6 +1,6 @@
 
-import { Table, Tag } from 'antd';
-import React, { FC, useState } from 'react'
+import { Space, Table, Tag } from 'antd';
+import React, { FC, ReactNode, useState } from 'react'
 
 
 // dataIndex	Display field of the data record, support nest path by string array	string | string[]
@@ -40,6 +40,19 @@ const columns = [
         })}
       </>
     ),
+  },
+  {
+    title: null,
+    key: 'action',
+    render: (record: IUsers) => {
+      console.log('record', record);
+      return (
+          <Space size="middle">
+            <a>Invite {record.name}</a>
+            <a>Delete</a>
+          </Space>
+      )
+    }
   },
 ];
 
