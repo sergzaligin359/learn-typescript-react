@@ -16,6 +16,7 @@ import { UpdateArticle } from './pages/articles/UpdateArticle';
 import { Count } from './pages/Count';
 import { Tasks } from './pages/tasks/Tasks';
 import { CandidateCard } from './pages/candidateCard/CandidateCard';
+import { TableFieldEditable } from './pages/tableFieldEditable/TableFieldEditable';
 
 const App: React.FC = () => {
   return (
@@ -35,6 +36,7 @@ const App: React.FC = () => {
           <Route component={Count} path="/count"/>
           <Route component={Tasks} path="/tasks"/>
           <Route component={CandidateCard} path="/candidate-card/:id"/>
+          <Route component={TableFieldEditable} path="/table-field-editable"/>
         </Switch>
       </div>
     </BrowserRouter>

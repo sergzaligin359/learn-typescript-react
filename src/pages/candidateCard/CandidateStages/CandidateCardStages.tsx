@@ -136,6 +136,15 @@ export const CandidateCardStages: React.FC<any> = () => {
       setStages([...stages, newStage])
     }
 
+    const save = (e: any) => {
+      console.log('ON BLUR NAME SAVE')
+      if(!e.target.value){
+        console.error('Name is required!')
+      }else{
+        console.log('Data name save success', e.target.value)
+      }
+    }
+
     console.log('add show stages', stages)
 
     return (
@@ -152,16 +161,19 @@ export const CandidateCardStages: React.FC<any> = () => {
                           defaultValue={stage.name}
                           name="name"
                           onChange={(e) => change(e, stage.id)}
+                          onBlur={(e) => save(e)}
                         />
                       </Form.Item>
 
                       <Form.Item>
                         {stage.date ? <DatePicker
                           onChange={(e) => changeDate(e, stage.id)}
+                          onBlur={() => console.log('ON BLUR Date')}
                           defaultValue={moment(stage.date?.toString()!)}
                           name="date"
                           /> : <DatePicker
                           onChange={(e) => changeDate(e, stage.id)}
+                          onBlur={() => console.log('ON BLUR Date')}
                           name="date"
                           />}
                       </Form.Item>
