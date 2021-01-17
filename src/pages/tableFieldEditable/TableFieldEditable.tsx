@@ -45,7 +45,7 @@ const columns = [
     title: null,
     key: 'action',
     render: (record: IUsers) => {
-      console.log('record', record);
+      // console.log('record', record);
       return (
           <Space size="middle">
             <a>Invite {record.name}</a>

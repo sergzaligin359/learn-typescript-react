@@ -17,6 +17,7 @@ export const Home: FC = () => {
         <div>
             <h1>Главная страница</h1>
             <ul>
+                <li><NavLink to="/table-field-editable-input">table-field-editable-input</NavLink></li>
                 <li><NavLink to="/table-field-editable">table-field-editable</NavLink></li>
                 <li><NavLink to="/candidate-card/1">Карточка кандидата</NavLink></li>
                 <li><NavLink to="/article/new">Страница создать статью</NavLink></li>
