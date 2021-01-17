@@ -10,8 +10,7 @@ interface CandidateCardFormProps {
 
 export const CandidateCardForm: React.FC<CandidateCardFormProps> = ({ username }) => {
   const [form] = Form.useForm<CandidateCardProps>();
-  console.log('username', username);
-  console.log('Form.useForm', form.getFieldsValue());
+  
   const onSubmit = (): void => {
     console.log(form.getFieldsValue());
   };

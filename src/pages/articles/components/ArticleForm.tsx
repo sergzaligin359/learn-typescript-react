@@ -43,40 +43,40 @@ export const ArticleForm: FC<ArticleFormProps> = ({ onSubmit, initialValues }) =
         <div className="row">
             <form className="col s12" onSubmit={handleSubmit}>
                 <div className="input-field col s12">
-                    <input 
+                    <input
                         value={title}
                         onChange={e => setTitle(e?.target.value)}
-                        id="title" 
+                        id="title"
                         type="text"
                         placeholder="Заголовок"
                     />
                 </div>
-                
+
                 <div className="input-field col s12">
-                    <input 
+                    <input
                         value={desc}
                         onChange={e => setDesc(e?.target.value)}
-                        id="desc" 
+                        id="desc"
                         type="text"
                         placeholder="Описание"
                     />
                 </div>
 
                 <div className="input-field col s12">
-                    <input 
+                    <input
                         value={text}
                         onChange={e => setText(e?.target.value)}
-                        id="text" 
+                        id="text"
                         type="text"
                         placeholder="Контент"
                     />
                 </div>
 
                 <div className="input-field col s12">
-                    <input 
+                    <input
                         value={tags?.join(',')}
                         onChange={handleTags}
-                        id="tags" 
+                        id="tags"
                         type="text"
                         placeholder="Тэги"
                     />
