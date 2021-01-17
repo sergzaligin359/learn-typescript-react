@@ -203,7 +203,21 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
             })}
           </>
         ),
+      },
+      {
+        title: null,
+        key: 'action',
+        dataIndex: 'id',
+        render: (record: string) => {
+          // console.log('Record', record)
+          return (
+            <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record)}>
+              <a>Delete</a>
+            </Popconfirm>
+          )
+        }
       }
+
     ];
 
     const data: IUsers[] = [
@@ -245,11 +259,13 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
       setUsers(newData);
     };
 
-    const handleDelete = (key: React.Key) => {
+    const handleDelete = (id: string) => {
+      console.log('DELETE user id', id)
       const dataSource = [...users];
-      setUsers(users.filter(item => item.id !== key));
-    };
+      setUsers(users.filter(item => item.id != id));
 
+    };
+console.log('After del users', users)
     const handleAdd = () => {
 
       const newData: IUsers = {
