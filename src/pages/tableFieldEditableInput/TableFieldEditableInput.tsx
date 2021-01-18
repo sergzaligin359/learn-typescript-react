@@ -61,13 +61,12 @@ const EditableCell: React.FC<EditableCellProps> = ({
     // console.log('form get value', form.getFieldsValue())
     if(dataIndex == 'date'){
       setType('date');
-      // console.log('dataIndex', dataIndex)
-      //console.log('record[dataIndex] date', record)
-      // form.setFieldsValue({ date: "2000-01-15T13:24:46.389" });
+
       form.setFieldsValue({ [dataIndex]: date });
     }
     if(dataIndex == 'statusId'){
         setType('select');
+        console.log('statusId value', record[dataIndex])
         form.setFieldsValue({ [dataIndex]: record[dataIndex] });
     }
     if(dataIndex == 'name' || dataIndex == 'age'){
@@ -116,10 +115,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
               message: `${title} is required.`,
             },
           ]}
+          // initialValue={333}
         >
           <Select
-              allowClear
+
+               allowClear
                ref={inputRef}
+               onBlur={save}
           >
                 <Select.Option
                     value={1}
@@ -130,6 +132,11 @@ const EditableCell: React.FC<EditableCellProps> = ({
                     value={2}
                     key={2}>
                     Отклонено HR
+                </Select.Option>
+                <Select.Option
+                    value={5}
+                    key={5}>
+                    Другое
                 </Select.Option>
           </Select>
         </Form.Item>
@@ -184,9 +191,9 @@ interface EditableTableState {
 
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-type Status = {
-  name: string,
-  accepted: boolean,
+interface IStatus  {
+  name: string
+  accepted: boolean
   id: number
 }
 
@@ -195,7 +202,7 @@ interface IUsers{
   name: string
   age: number
   date: string | null
-  statusId: number | null,
+  statusId: number | null
   address: string
   tags: string[]
 }
@@ -228,7 +235,11 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         title: 'Статус',
         dataIndex: 'statusId',
         key: 'statusId',
-        editable: true
+        editable: true,
+        render: (statusId: any): any => {
+          // console.log('id', status.filter((item) => item.id === statusId)[0])
+          return status.filter((item) => item.id === statusId)[0].name
+        }
       },
       {
         title: 'Адрес',
@@ -286,7 +297,7 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         name: 'Jim Green',
         age: 42,
         date: "2021-01-09T15:30:11.426",
-        statusId: 1,
+        statusId: 2,
         address: 'London No. 1 Lake Park',
         tags: ['loser'],
       },
@@ -295,13 +306,56 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         name: 'Joe Black',
         age: 32,
         date: null,
-        statusId: 1,
+        statusId: 7,
         address: 'Sidney No. 1 Lake Park',
         tags: ['cool', 'teacher'],
       },
     ];
+    const dataStatus: IStatus[] = [
+      {
+          name: "Отклонен HR",
+          accepted: false,
+          id: 2
+      },
+      {
+          name: "Отклонен руководителем",
+          accepted: false,
+          id: 4
+      },
+      {
+          name: "Отклонен при верификации",
+          accepted: false,
+          id: 6
+      },
+      {
+          name: "Отказ кандидата",
+          accepted: false,
+          id: 8
+      },
+      {
+          name: "Одобрен HR",
+          accepted: true,
+          id: 1
+      },
+      {
+          name: "Одобрен руководителем",
+          accepted: true,
+          id: 3
+      },
+      {
+          name: "Верификация успешна ",
+          accepted: true,
+          id: 5
+      },
+      {
+          name: "Кандидат согласен ",
+          accepted: true,
+          id: 7
+      }
+    ]
 
     const [users, setUsers] = useState<IUsers[]>(data)
+    const [status, setStatus] = useState<IStatus[]>(dataStatus)
 
     // console.log('USERS data: ', users)
 
@@ -375,6 +429,48 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
     )
 }
 
+const status = [
+        {
+            name: "Отклонен HR",
+            accepted: false,
+            "id": 2
+        },
+        {
+            name: "Отклонен руководителем",
+            accepted: false,
+            id: 4
+        },
+        {
+            name: "Отклонен при верификации",
+            accepted: false,
+            id: 6
+        },
+        {
+            name: "Отказ кандидата",
+            accepted: false,
+            id: 8
+        },
+        {
+            name: "Одобрен HR",
+            accepted: true,
+            id: 1
+        },
+        {
+            name: "Одобрен руководителем",
+            accepted: true,
+            id: 3
+        },
+        {
+            name: "Верификация успешна ",
+            accepted: true,
+            id: 5
+        },
+        {
+            name: "Кандидат согласен ",
+            accepted: true,
+            id: 7
+        }
+    ]
 
 const stagesForCard: any = [
     {
