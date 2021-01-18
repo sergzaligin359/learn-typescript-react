@@ -1,6 +1,6 @@
 
 import React, { useContext, useState, useEffect, useRef, FC } from 'react';
-import { Table, Input, Button, Popconfirm, Form, Space, Tag, DatePicker } from 'antd';
+import { Table, Input, Button, Popconfirm, Form, Space, Tag, DatePicker, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import moment from 'moment';
 
@@ -65,7 +65,12 @@ const EditableCell: React.FC<EditableCellProps> = ({
       //console.log('record[dataIndex] date', record)
       // form.setFieldsValue({ date: "2000-01-15T13:24:46.389" });
       form.setFieldsValue({ [dataIndex]: date });
-    }else{
+    }
+    if(dataIndex == 'statusId'){
+        setType('select');
+        form.setFieldsValue({ [dataIndex]: record[dataIndex] });
+    }
+    if(dataIndex == 'name' || dataIndex == 'age'){
       setType('input');
       form.setFieldsValue({ [dataIndex]: record[dataIndex] });
     }
@@ -100,7 +105,51 @@ const EditableCell: React.FC<EditableCellProps> = ({
   let childNode = children;
 
   if (editable) {
-    if(type !== 'date'){
+    if(type == 'select'){
+      childNode = editing ? (
+        <Form.Item
+          style={{ margin: 0 }}
+          name={dataIndex}
+          rules={[
+            {
+              required: true,
+              message: `${title} is required.`,
+            },
+          ]}
+        >
+          <Select
+              allowClear
+               ref={inputRef}
+          >
+                <Select.Option
+                    value={1}
+                    key={1}>
+                    Одобрено HR
+                </Select.Option>
+                <Select.Option
+                    value={2}
+                    key={2}>
+                    Отклонено HR
+                </Select.Option>
+          </Select>
+        </Form.Item>
+      ) : (
+        <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
+          {children}
+        </div>
+      );
+    }
+    if(type == 'date'){
+      const dateFormat = "YYYY/MM/DD";
+      childNode = editing ? (
+           <DatePicker ref={inputRef}  onBlur={save} name="date" onChange={ (e) => onChangeDate(e) } />
+      ) : (
+        <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
+          {children}
+        </div>
+      );
+    }
+    if(type == 'input'){
       childNode = editing ? (
         <Form.Item
           style={{ margin: 0 }}
@@ -114,15 +163,6 @@ const EditableCell: React.FC<EditableCellProps> = ({
         >
           <Input ref={inputRef} onPressEnter={save} onBlur={save} />
         </Form.Item>
-      ) : (
-        <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
-          {children}
-        </div>
-      );
-    }else{
-      const dateFormat = "YYYY/MM/DD";
-      childNode = editing ? (
-           <DatePicker ref={inputRef}  onBlur={save} name="date" onChange={ (e) => onChangeDate(e) } />
       ) : (
         <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
           {children}
@@ -144,12 +184,18 @@ interface EditableTableState {
 
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
+type Status = {
+  name: string,
+  accepted: boolean,
+  id: number
+}
 
 interface IUsers{
   id: string
   name: string
   age: number
   date: string | null
+  statusId: number | null,
   address: string
   tags: string[]
 }
@@ -174,9 +220,15 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         dataIndex: 'date',
         key: 'date',
         editable: true,
-        render: (date: any): any =>{
+        render: (date: any): any => {
           return date ? moment(date).format('YYYY/MM/DD') : ' '
         }
+      },
+      {
+        title: 'Статус',
+        dataIndex: 'statusId',
+        key: 'statusId',
+        editable: true
       },
       {
         title: 'Адрес',
@@ -225,6 +277,7 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         name: 'John Brown',
         age: 32,
         date: "2021-01-09T15:30:11.426",
+        statusId: 1,
         address: 'New York No. 1 Lake Park',
         tags: ['nice', 'developer'],
       },
@@ -233,6 +286,7 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         name: 'Jim Green',
         age: 42,
         date: "2021-01-09T15:30:11.426",
+        statusId: 1,
         address: 'London No. 1 Lake Park',
         tags: ['loser'],
       },
@@ -241,6 +295,7 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         name: 'Joe Black',
         age: 32,
         date: null,
+        statusId: 1,
         address: 'Sidney No. 1 Lake Park',
         tags: ['cool', 'teacher'],
       },
@@ -275,6 +330,7 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
         name: `Edward King`,
         age: 32,
         date: null,
+        statusId: 1,
         address: `London, Park Lane no.`,
         tags: ['newTag']
       };
