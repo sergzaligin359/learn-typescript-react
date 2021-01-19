@@ -30,6 +30,7 @@ interface EditableCellProps {
   dataIndex: keyof IUsers;
   record: IUsers;
   handleSave: (record: IUsers) => void;
+  status: IStatus[]
 }
 
 const EditableCell: React.FC<EditableCellProps> = ({
@@ -39,6 +40,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   dataIndex,
   record,
   handleSave,
+  status,
   ...restProps
 }) => {
   const [type, setType] = useState('input');
@@ -123,21 +125,15 @@ const EditableCell: React.FC<EditableCellProps> = ({
                ref={inputRef}
                onBlur={save}
           >
-                <Select.Option
-                    value={1}
-                    key={1}>
-                    Одобрено HR
-                </Select.Option>
-                <Select.Option
-                    value={2}
-                    key={2}>
-                    Отклонено HR
-                </Select.Option>
-                <Select.Option
-                    value={5}
-                    key={5}>
-                    Другое
-                </Select.Option>
+          {
+            status && (
+                status.map((item: any) => {
+                    return <Select.Option value={item.id} key={item.id}>
+                        {item.name}
+                    </Select.Option>
+                })
+            )
+          }
           </Select>
         </Form.Item>
       ) : (
@@ -409,6 +405,7 @@ export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableSta
           dataIndex: col.dataIndex,
           title: col.title,
           handleSave: handleSave,
+          status: status
         }),
       };
     });
