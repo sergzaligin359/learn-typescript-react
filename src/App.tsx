@@ -27,6 +27,7 @@ import TopBar from './components/TopBar.js';
 import Dnd2Tree from 'pages/dnd2tree/Dnd2Tree';
 import ReactSortableTree from 'pages/reactSortableTree/ReactSortableTree';
 import BdndTree from 'pages/bDndTree/BdndTree';
+import MyCurrentVersionDnd from 'pages/myCurrentVersionDnd/MyCurrentVersionDnd';
 
 const App: React.FC = () => {
   return (
@@ -57,6 +58,7 @@ const App: React.FC = () => {
           <Route component={Dnd2Tree}  path="/dnd2tree"/>
           <Route component={ReactSortableTree}  path="/react-sortable-tree"/>
           <Route component={BdndTree}  path="/b-dnd-tree"/>
+          <Route component={MyCurrentVersionDnd}  path="/my-current-dnd-tree"/>
         </Switch>
       </div>
     </BrowserRouter>

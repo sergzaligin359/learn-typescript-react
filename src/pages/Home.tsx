@@ -17,6 +17,7 @@ export const Home: FC = () => {
         <div>
             <h1>Главная страница</h1>
             <ul>
+                <li><NavLink to="/my-current-dnd-tree">My current dnd tree</NavLink></li>
                 <li><NavLink to="/b-dnd-tree">B dnd tree</NavLink></li>
                 <li><NavLink to="/react-sortable-tree">React-sortable-tree</NavLink></li>
                 <li><NavLink to="/dnd2tree">Dnd2tree</NavLink></li>
