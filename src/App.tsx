@@ -18,11 +18,20 @@ import { Tasks } from './pages/tasks/Tasks';
 import { CandidateCard } from './pages/candidateCard/CandidateCard';
 import { TableFieldEditable } from './pages/tableFieldEditable/TableFieldEditable';
 import { TableFieldEditableInput } from './pages/tableFieldEditableInput/TableFieldEditableInput';
+import { SelectTree } from './pages/selectTree/SelectTree';
+import { MemoryGame } from './pages/memoryGame/MemoryGame';
+import GlobalFeed from './pages/globalFeed';
+import Article from './pages/article';
+import Authentication from './pages/authentication';
+import TopBar from './components/TopBar.js';
+import Dnd2Tree from 'pages/dnd2tree/Dnd2Tree';
+import ReactSortableTree from 'pages/reactSortableTree/ReactSortableTree';
+import BdndTree from 'pages/bDndTree/BdndTree';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <NavBar />
+      <TopBar />
       <div className="container">
         <Switch>
           <Route component={SetData} path="/set-data"/>
@@ -39,6 +48,15 @@ const App: React.FC = () => {
           <Route component={CandidateCard} path="/candidate-card/:id"/>
           <Route component={TableFieldEditable} path="/table-field-editable"/>
           <Route component={TableFieldEditableInput} path="/table-field-editable-input"/>
+          <Route component={SelectTree} path="/select-tree"/>
+          <Route component={MemoryGame} path="/memory-game"/>
+          <Route component={GlobalFeed} path="/global-feed" exact/>
+          <Route component={Article}  path="/global-feed/article/:slug"/>
+          <Route component={Authentication}  path="/global-feed/login"/>
+          <Route component={Authentication}  path="/global-feed/register"/>
+          <Route component={Dnd2Tree}  path="/dnd2tree"/>
+          <Route component={ReactSortableTree}  path="/react-sortable-tree"/>
+          <Route component={BdndTree}  path="/b-dnd-tree"/>
         </Switch>
       </div>
     </BrowserRouter>

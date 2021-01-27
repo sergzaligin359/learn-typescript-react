@@ -17,6 +17,12 @@ export const Home: FC = () => {
         <div>
             <h1>Главная страница</h1>
             <ul>
+                <li><NavLink to="/b-dnd-tree">B dnd tree</NavLink></li>
+                <li><NavLink to="/react-sortable-tree">React-sortable-tree</NavLink></li>
+                <li><NavLink to="/dnd2tree">Dnd2tree</NavLink></li>
+                <li><NavLink to="/global-feed">Global Feed</NavLink></li>
+                <li><NavLink to="/memory-game">Memory Game</NavLink></li>
+                <li><NavLink to="/select-tree">select-tree</NavLink></li>
                 <li><NavLink to="/table-field-editable-input">table-field-editable-input</NavLink></li>
                 <li><NavLink to="/table-field-editable">table-field-editable</NavLink></li>
                 <li><NavLink to="/candidate-card/1">Карточка кандидата</NavLink></li>

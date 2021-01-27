@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect, useRef, FC } from 'react';
 import { Table, Input, Button, Popconfirm, Form, Space, Tag, DatePicker, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import moment from 'moment';
+import { fetchCandidate } from '../../api/instance';
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
@@ -205,6 +206,27 @@ interface IUsers{
 
 export const TableFieldEditableInput: FC = <EditableTableProps, EditableTableState>() => {
 
+    const [candidate, setCandidate]: any = useState()
+    const [vaca, setVaca]: any = useState(
+      {
+          name: "начальник отдела",
+          fullName: "начальник отдела",
+          isStatePosition: true,
+          id: 2
+      }
+    )
+    useEffect(() => {
+      // async function fetchApi() {
+      //     const res: any = await fetchCandidate()
+      //
+      // }
+      // fetchApi()
+      setCandidate({
+        position: {name: "Позиция 1", id: 2}
+      })
+    }, [])
+    console.log('candidate', candidate)
+    
     const columns: (ColumnTypes[number] & { editable?: boolean; dataIndex: string })[] = [
       {
         title: 'Имя',
